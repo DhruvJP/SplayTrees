@@ -215,7 +215,7 @@ class SplayTreePresentation(Slide, Scene):
 # -------------------------------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------------------------------
 
-        # --- Zig-Zig Rotation Slide ---
+        # --- Zag Rotation Slide ---
         zag_header = Text("Zag (Single Left Rotation)").scale(0.8).to_edge(UP, buff=0.3)
         self.play(Write(zag_header))
         
@@ -328,68 +328,70 @@ class SplayTreePresentation(Slide, Scene):
         # --- Zig-Zag Rotation Slide ---
         zig_zag_H = Text("Zig-Zag Rotation").scale(0.8).to_edge(UP, buff=0.3)
         self.play(Write(zig_zag_H))
-        
-        # original tree
-        zig_zag_T = BinaryTree(4, level = 0)
-        zig_zag_T.left = BinaryTree(3, level = 1)
-        zig_zag_T.right = BinaryTree(6, level = 1)
-        zig_zag_T.right.left = BinaryTree(5, level = 2)
-        zig_zag_T.right.right = BinaryTree(7, level = 2)
+
+        # Original tree
+        zig_zag_T = BinaryTree(4, level=0)
+        zig_zag_T.left = BinaryTree(3, level=1)
+        zig_zag_T.right = BinaryTree(6, level=1)
+        zig_zag_T.right.left = BinaryTree(5, level=2)
+        zig_zag_T.right.right = BinaryTree(7, level=2)
         zig_zag_T.arrange_subtrees()
         zig_zag_T.move_to(ORIGIN)
-        
+
         zig_zag_L = Text("0. Original Splay Tree, Zig-Zag(5)").scale(0.5).next_to(zig_zag_T, DOWN)
         zig_zag_L.set_color(redC)
-        
+
         zig_zag_grp = VGroup(zig_zag_T, zig_zag_L)
         self.play(Write(zig_zag_grp))
         self.next_slide()
-        self.play(FadeOut(zig_zag_grp))
 
-# -------------------------------------------------------------------------------------------------------------------------------------------
-        zig_zag_Z = BinaryTree(4, level = 0)
-        zig_zag_Z.left = BinaryTree(3, level = 1)
-        zig_zag_Z.right = BinaryTree(5, level = 1)
-        zig_zag_Z.right.right = BinaryTree(6, level = 2)
-        zig_zag_Z.right.right.right = BinaryTree(7, level = 3)
+        # --- Replace with first transformation ---
+        zig_zag_Z = BinaryTree(4, level=0)
+        zig_zag_Z.left = BinaryTree(3, level=1)
+        zig_zag_Z.right = BinaryTree(5, level=1)
+        zig_zag_Z.right.right = BinaryTree(6, level=2)
+        zig_zag_Z.right.right.right = BinaryTree(7, level=3)
         zig_zag_Z.arrange_subtrees()
         zig_zag_Z.move_to(ORIGIN)
-        
+
         zig_zag_ZLabel = Text("1. Zig Rotation(6)").scale(0.5).next_to(zig_zag_Z, DOWN)
         zig_zag_ZLabel.set_color(yellowC)
-        
+
         zig_zag_ZGrp = VGroup(zig_zag_Z, zig_zag_ZLabel)
-        self.play(Write(zig_zag_ZGrp))
+        # Transform the entire original group into the new group
+        self.play(ReplacementTransform(zig_zag_grp, zig_zag_ZGrp))
         self.next_slide()
         self.play(FadeOut(zig_zag_ZGrp))
-# -------------------------------------------------------------------------------------------------------------------------------------------
-        zig_zag_ZG = BinaryTree(5, level = 0)
-        zig_zag_ZG.left = BinaryTree(4, level = 1)
-        zig_zag_ZG.right = BinaryTree(6, level = 1)
-        zig_zag_ZG.left.left = BinaryTree(3, level = 2)
-        zig_zag_ZG.right.right = BinaryTree(7, level = 2)
+
+        # --- Replace with second transformation ---
+        zig_zag_ZG = BinaryTree(5, level=0)
+        zig_zag_ZG.left = BinaryTree(4, level=1)
+        zig_zag_ZG.right = BinaryTree(6, level=1)
+        zig_zag_ZG.left.left = BinaryTree(3, level=2)
+        zig_zag_ZG.right.right = BinaryTree(7, level=2)
         zig_zag_ZG.arrange_subtrees()
         zig_zag_ZG.move_to(ORIGIN)
-        
+
         zig_zag_ZGLabel = Text("2. Zag Rotation(4)").scale(0.5).next_to(zig_zag_ZG, DOWN)
         zig_zag_ZGLabel.set_color(greenC)
 
         zig_zag_ZG_Grp = VGroup(zig_zag_ZG, zig_zag_ZGLabel)
-        self.play(Write(zig_zag_ZG_Grp))
+        # Transform the previous group into the new one
+        self.play(ReplacementTransform(zig_zag_ZGrp, zig_zag_ZG_Grp))
         self.next_slide()
         self.play(FadeOut(zig_zag_ZG_Grp), FadeOut(zig_zag_H))
 # -------------------------------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------------------------------
         # --- Zag-Zig Rotation Slide ---
-        zag_zig_H = Text("Zag-Zig Rotation)").scale(0.8).to_edge(UP, buff=0.3)
+        zag_zig_H = Text("Zag-Zig Rotation").scale(0.8).to_edge(UP, buff=0.3)
         self.play(Write(zag_zig_H))
 
-        # original tree
-        zag_zig_T = BinaryTree(6, level = 0)
-        zag_zig_T.left = BinaryTree(4, level = 1)
-        zag_zig_T.right = BinaryTree(7, level = 1)
-        zag_zig_T.left.left = BinaryTree(3, level = 2)
-        zag_zig_T.left.right = BinaryTree(5, level = 2)
+        # Original tree
+        zag_zig_T = BinaryTree(6, level=0)
+        zag_zig_T.left = BinaryTree(4, level=1)
+        zag_zig_T.right = BinaryTree(7, level=1)
+        zag_zig_T.left.left = BinaryTree(3, level=2)
+        zag_zig_T.left.right = BinaryTree(5, level=2)
         zag_zig_T.arrange_subtrees()
         zag_zig_T.move_to(ORIGIN)
 
@@ -399,38 +401,38 @@ class SplayTreePresentation(Slide, Scene):
         zag_zig_grp = VGroup(zag_zig_T, zag_zig_L)
         self.play(Write(zag_zig_grp))
         self.next_slide()
-        self.play(FadeOut(zag_zig_grp))
-# -------------------------------------------------------------------------------------------------------------------------------------------
-        zag_zig_Z = BinaryTree(6, level = 0)
-        zag_zig_Z.left = BinaryTree(5, level = 1)
-        zag_zig_Z.right = BinaryTree(7, level = 1)
-        zag_zig_Z.left.left = BinaryTree(4, level = 2)
-        zag_zig_Z.left.left.left = BinaryTree(3, level = 3)
+
+        # --- First Transformation: Replace original with Zag Rotation ---
+        zag_zig_Z = BinaryTree(6, level=0)
+        zag_zig_Z.left = BinaryTree(5, level=1)
+        zag_zig_Z.right = BinaryTree(7, level=1)
+        zag_zig_Z.left.left = BinaryTree(4, level=2)
+        zag_zig_Z.left.left.left = BinaryTree(3, level=3)
         zag_zig_Z.arrange_subtrees()
         zag_zig_Z.move_to(ORIGIN)
-
 
         zag_zig_ZLabel = Text("1. Zag Rotation(3)").scale(0.5).next_to(zag_zig_Z, DOWN)
         zag_zig_ZLabel.set_color(yellowC)
 
         zag_zig_ZGrp = VGroup(zag_zig_Z, zag_zig_ZLabel)
-        self.play(Write(zag_zig_ZGrp))
+        self.play(ReplacementTransform(zag_zig_grp, zag_zig_ZGrp))
         self.next_slide()
         self.play(FadeOut(zag_zig_ZGrp))
-# -------------------------------------------------------------------------------------------------------------------------------------------
-        zag_zig_ZG = BinaryTree(5, level = 0)
-        zag_zig_ZG.left = BinaryTree(4, level = 1)
-        zag_zig_ZG.right = BinaryTree(6, level = 1)
-        zag_zig_ZG.left.left = BinaryTree(3, level = 2)
-        zag_zig_ZG.right.right = BinaryTree(7, level = 2)
+
+        # --- Second Transformation: Replace Zag with Zig Rotation ---
+        zag_zig_ZG = BinaryTree(5, level=0)
+        zag_zig_ZG.left = BinaryTree(4, level=1)
+        zag_zig_ZG.right = BinaryTree(6, level=1)
+        zag_zig_ZG.left.left = BinaryTree(3, level=2)
+        zag_zig_ZG.right.right = BinaryTree(7, level=2)
         zag_zig_ZG.arrange_subtrees()
         zag_zig_ZG.move_to(ORIGIN)
-        
+
         zag_zig_ZGLabel = Text("2. Zig Rotation(6)").scale(0.5).next_to(zag_zig_ZG, DOWN)
         zag_zig_ZGLabel.set_color(greenC)
 
         zag_zig_ZG_Grp = VGroup(zag_zig_ZG, zag_zig_ZGLabel)
-        self.play(Write(zag_zig_ZG_Grp))
+        self.play(ReplacementTransform(zag_zig_ZGrp, zag_zig_ZG_Grp))
         self.next_slide()
         self.play(FadeOut(zag_zig_ZG_Grp), FadeOut(zag_zig_H))
 
@@ -455,17 +457,16 @@ class SplayTreePresentation(Slide, Scene):
 
 # -------------------------------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------------------------------
-    # Search implementation
-        # --- Search slide ---
+        # --- Search Slide ---
         search_H = Text("Splay Trees Method: Search()").scale(0.8).to_edge(UP, buff=0.3)
         self.play(Write(search_H))
 
-        # original tree
-        search_1 = BinaryTree(1, level = 0)
-        search_1.left = BinaryTree(2, level = 1)
-        search_1.right = BinaryTree(4, level = 1)
-        search_1.right.left = BinaryTree(3, level = 2)
-        search_1.right.right = BinaryTree(8, level = 2)
+        # Original tree
+        search_1 = BinaryTree(1, level=0)
+        search_1.left = BinaryTree(2, level=1)
+        search_1.right = BinaryTree(4, level=1)
+        search_1.right.left = BinaryTree(3, level=2)
+        search_1.right.right = BinaryTree(8, level=2)
         search_1.arrange_subtrees()
         search_1.move_to(ORIGIN)
 
@@ -475,15 +476,13 @@ class SplayTreePresentation(Slide, Scene):
         search_1grp = VGroup(search_1, search_1Label)
         self.play(Write(search_1grp))
         self.next_slide()
-        self.play(FadeOut(search_1grp))
 
-# -------------------------------------------------------------------------------------------------------------------------------------------
-        # Zig
-        search_2 = BinaryTree(1, level = 0)
-        search_2.left = BinaryTree(2, level = 1)
-        search_2.right = BinaryTree(3, level = 1)
-        search_2.right.right = BinaryTree(4, level = 2)
-        search_2.right.right.right = BinaryTree(8, level = 3)
+        # --- Replace Original with "Zig" ---
+        search_2 = BinaryTree(1, level=0)
+        search_2.left = BinaryTree(2, level=1)
+        search_2.right = BinaryTree(3, level=1)
+        search_2.right.right = BinaryTree(4, level=2)
+        search_2.right.right.right = BinaryTree(8, level=3)
         search_2.arrange_subtrees()
         search_2.move_to(ORIGIN)
 
@@ -491,16 +490,15 @@ class SplayTreePresentation(Slide, Scene):
         search_2Label.set_color(yellowC)
 
         search_2grp = VGroup(search_2, search_2Label)
-        self.play(Write(search_2grp))
+        self.play(ReplacementTransform(search_1grp, search_2grp))
         self.next_slide()
-        self.play(FadeOut(search_2grp))
-# -------------------------------------------------------------------------------------------------------------------------------------------
-        # Zag
-        search_3 = BinaryTree(3, level = 0)
-        search_3.left = BinaryTree(1, level = 1)
-        search_3.right = BinaryTree(4, level = 1)
-        search_3.left.left = BinaryTree(2, level = 2)
-        search_3.right.right = BinaryTree(8, level = 2)
+
+        # --- Replace "Zig" with "Zag" ---
+        search_3 = BinaryTree(3, level=0)
+        search_3.left = BinaryTree(1, level=1)
+        search_3.right = BinaryTree(4, level=1)
+        search_3.left.left = BinaryTree(2, level=2)
+        search_3.right.right = BinaryTree(8, level=2)
         search_3.arrange_subtrees()
         search_3.move_to(ORIGIN)
 
@@ -508,21 +506,23 @@ class SplayTreePresentation(Slide, Scene):
         search_3Label.set_color(greenC)
 
         search_3grp = VGroup(search_3, search_3Label)
-        self.play(Write(search_3grp))
+        self.play(ReplacementTransform(search_2grp, search_3grp))
         self.next_slide()
+
         self.play(FadeOut(search_3grp), FadeOut(search_H))
 
 # -------------------------------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------------------------------
-        # Insert implementation
+        # --- Insert Implementation ---
         insert_H = Text("Splay Trees Method: Insert()").scale(0.8).to_edge(UP, buff=0.3)
         self.play(Write(insert_H))
 
-        insert_0 = BinaryTree(1, level = 0)
-        insert_0.left = BinaryTree(2, level = 1)
-        insert_0.right = BinaryTree(4, level = 1)
-        insert_0.right.left = BinaryTree(3, level = 2)
-        insert_0.right.right = BinaryTree(8, level = 2)
+        # Original tree
+        insert_0 = BinaryTree(1, level=0)
+        insert_0.left = BinaryTree(2, level=1)
+        insert_0.right = BinaryTree(4, level=1)
+        insert_0.right.left = BinaryTree(3, level=2)
+        insert_0.right.right = BinaryTree(8, level=2)
         insert_0.arrange_subtrees()
         insert_0.move_to(ORIGIN)
 
@@ -532,15 +532,14 @@ class SplayTreePresentation(Slide, Scene):
         insert_0grp = VGroup(insert_0, insert_0Label)
         self.play(Write(insert_0grp))
         self.next_slide()
-        self.play(FadeOut(insert_0grp))
 
-# -------------------------------------------------------------------------------------------------------------------------------------------
-        insert_1 = BinaryTree(1, level = 0)
-        insert_1.left = BinaryTree(2, level = 1)
-        insert_1.right = BinaryTree(4, level = 1)
-        insert_1.left.left = BinaryTree(0, level = 2)
-        insert_1.right.left = BinaryTree(3, level = 2)
-        insert_1.right.right = BinaryTree(8, level = 2)
+        # Replace Original with Insert(0)
+        insert_1 = BinaryTree(1, level=0)
+        insert_1.left = BinaryTree(2, level=1)
+        insert_1.right = BinaryTree(4, level=1)
+        insert_1.left.left = BinaryTree(0, level=2)
+        insert_1.right.left = BinaryTree(3, level=2)
+        insert_1.right.right = BinaryTree(8, level=2)
         insert_1.arrange_subtrees()
         insert_1.move_to(ORIGIN)
 
@@ -548,17 +547,16 @@ class SplayTreePresentation(Slide, Scene):
         insert_1Label.set_color(redC)
 
         insert_1grp = VGroup(insert_1, insert_1Label)
-        self.play(Write(insert_1grp))
+        self.play(ReplacementTransform(insert_0grp, insert_1grp))
         self.next_slide()
-        self.play(FadeOut(insert_1grp))
-# -------------------------------------------------------------------------------------------------------------------------------------------
-        # Zig 1
-        insert_2 = BinaryTree(2, level = 0)
-        insert_2.left = BinaryTree(0, level = 1)
-        insert_2.right = BinaryTree(1, level = 1)
-        insert_2.right.left = BinaryTree(3, level = 2)
-        insert_2.right.right = BinaryTree(4, level = 2)
-        insert_2.right.right.right = BinaryTree(8, level = 2)
+
+        # Replace with Zig 1 state
+        insert_2 = BinaryTree(2, level=0)
+        insert_2.left = BinaryTree(0, level=1)
+        insert_2.right = BinaryTree(1, level=1)
+        insert_2.right.left = BinaryTree(3, level=2)
+        insert_2.right.right = BinaryTree(4, level=2)
+        insert_2.right.right.right = BinaryTree(8, level=2)
         insert_2.arrange_subtrees()
         insert_2.move_to(ORIGIN)
 
@@ -566,17 +564,16 @@ class SplayTreePresentation(Slide, Scene):
         insert_2Label.set_color(yellowC)
 
         insert_2grp = VGroup(insert_2, insert_2Label)
-        self.play(Write(insert_2grp))
+        self.play(ReplacementTransform(insert_1grp, insert_2grp))
         self.next_slide()
-        self.play(FadeOut(insert_2grp))
-# -------------------------------------------------------------------------------------------------------------------------------------------
-        # Zig 2
-        insert_3 = BinaryTree(0, level = 0)
-        insert_3.right = BinaryTree(2, level = 1)
-        insert_3.right.right = BinaryTree(1, level = 2)
-        insert_3.right.right.left = BinaryTree(3, level = 3)
-        insert_3.right.right.right = BinaryTree(4, level = 3)
-        insert_3.right.right.right.right = BinaryTree(8, level = 4)
+
+        # Replace with Zig 2 state (final tree)
+        insert_3 = BinaryTree(0, level=0)
+        insert_3.right = BinaryTree(2, level=1)
+        insert_3.right.right = BinaryTree(1, level=2)
+        insert_3.right.right.left = BinaryTree(3, level=3)
+        insert_3.right.right.right = BinaryTree(4, level=3)
+        insert_3.right.right.right.right = BinaryTree(8, level=4)
         insert_3.arrange_subtrees()
         insert_3.move_to(ORIGIN)
 
@@ -584,20 +581,22 @@ class SplayTreePresentation(Slide, Scene):
         insert_3Label.set_color(greenC)
 
         insert_3grp = VGroup(insert_3, insert_3Label)
-        self.play(Write(insert_3grp))
+        self.play(ReplacementTransform(insert_2grp, insert_3grp))
         self.next_slide()
+
         self.play(FadeOut(insert_3grp), FadeOut(insert_H))
 # -------------------------------------------------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------------------------------------
-        # Delete implementation
+        # --- Delete Implementation ---
         delete_H = Text("Splay Trees Method: Delete()").scale(0.8).to_edge(UP, buff=0.3)
         self.play(Write(delete_H))
 
-        delete_1 = BinaryTree(1, level = 0)
-        delete_1.left = BinaryTree(2, level = 1)
-        delete_1.right = BinaryTree(4, level = 1)
-        delete_1.right.left = BinaryTree(3, level = 2)
-        delete_1.right.right = BinaryTree(8, level = 2)
+        # Original tree
+        delete_1 = BinaryTree(1, level=0)
+        delete_1.left = BinaryTree(2, level=1)
+        delete_1.right = BinaryTree(4, level=1)
+        delete_1.right.left = BinaryTree(3, level=2)
+        delete_1.right.right = BinaryTree(8, level=2)
         delete_1.arrange_subtrees()
         delete_1.move_to(ORIGIN)
 
@@ -607,13 +606,12 @@ class SplayTreePresentation(Slide, Scene):
         delete_1grp = VGroup(delete_1, delete_1Label)
         self.play(Write(delete_1grp))
         self.next_slide()
-        self.play(FadeOut(delete_1grp))
-# -------------------------------------------------------------------------------------------------------------------------------------------
-        # delete 3:
-        delete_2 = BinaryTree(1, level = 0)
-        delete_2.left = BinaryTree(2, level = 1)
-        delete_2.right = BinaryTree(4, level = 1)
-        delete_2.right.right = BinaryTree(8, level = 2)
+
+        # --- Replace Original with Delete(3) state ---
+        delete_2 = BinaryTree(1, level=0)
+        delete_2.left = BinaryTree(2, level=1)
+        delete_2.right = BinaryTree(4, level=1)
+        delete_2.right.right = BinaryTree(8, level=2)
         delete_2.arrange_subtrees()
         delete_2.move_to(ORIGIN)
 
@@ -621,15 +619,14 @@ class SplayTreePresentation(Slide, Scene):
         delete_2Label.set_color(yellowC)
 
         delete_2grp = VGroup(delete_2, delete_2Label)
-        self.play(Write(delete_2grp))
+        self.play(ReplacementTransform(delete_1grp, delete_2grp))
         self.next_slide()
-        self.play(FadeOut(delete_2grp))
-# -------------------------------------------------------------------------------------------------------------------------------------------
-        # 2. Zag:
-        delete_3 = BinaryTree(4, level = 0)
-        delete_3.left = BinaryTree(1, level = 1)
-        delete_3.right = BinaryTree(8, level = 1)
-        delete_3.left.left = BinaryTree(2, level = 2)
+
+        # --- Replace Delete(3) state with final Zag state ---
+        delete_3 = BinaryTree(4, level=0)
+        delete_3.left = BinaryTree(1, level=1)
+        delete_3.right = BinaryTree(8, level=1)
+        delete_3.left.left = BinaryTree(2, level=2)
         delete_3.arrange_subtrees()
         delete_3.move_to(ORIGIN)
 
@@ -637,8 +634,9 @@ class SplayTreePresentation(Slide, Scene):
         delete_3Label.set_color(greenC)
 
         delete_3grp = VGroup(delete_3, delete_3Label)
-        self.play(Write(delete_3grp))
+        self.play(ReplacementTransform(delete_2grp, delete_3grp))
         self.next_slide()
+
         self.play(FadeOut(delete_3grp), FadeOut(delete_H))
 
 # -------------------------------------------------------------------------------------------------------------------------------------------
